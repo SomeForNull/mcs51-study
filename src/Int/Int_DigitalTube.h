@@ -1,6 +1,6 @@
 #ifndef __INT_DIGITALTUBE_H__
 #define __INT_DIGITALTUBE_H__
-#include "../Com/Com_Util.h"
+#include "Com_Util.h"
 #include <STC89C5xRC.H>
 
 
