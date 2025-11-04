@@ -1,8 +1,8 @@
 #ifndef __INT_DIGITALTUBE_H__
 #define __INT_DIGITALTUBE_H__
-
+#include "../Com/Com_Util.h"
 #include <STC89C5xRC.H>
-#include "Com.Util.h"
+
 
 /**
  * @brief 数码管初始化方法
