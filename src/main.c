@@ -10,6 +10,7 @@ int main()
         key_pressed = Int_MatrixKey_CheckKey();
         if (key_pressed) {
             Int_DigitalTube_DisplayNum(key_pressed);
+            Int_Buzzer_Buzz();
         }
         Int_DigitalTube_Refresh();
     }
