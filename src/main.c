@@ -7,16 +7,8 @@ int main()
     // 初始化数码管显示和按键扫描
     u8 key_pressed = 0;
     Init_INT0();
-    Int_DigitalTube_Init();
-    Int_DigitalTube_DisplayNum(key_pressed);
-    while (1) {
-        key_pressed = Int_MatrixKey_CheckKey();
-        if (key_pressed) {
-            Int_DigitalTube_DisplayNum(key_pressed);
-            Int_Buzzer_Buzz();
-        }
-        Int_DigitalTube_Refresh();
-    }
+while (1);
+
 }
 
 
@@ -31,6 +23,10 @@ void INT0_Func() interrupt 0
 {
     //延时消抖
     Com_Util_Delay_Ms(10);
-    // 中断中打开LED0
+    //如果延迟后还在低位则是正常 就算后延抖动下降延触发的时候 延迟10ms后 会在高电位
+    if(P32==0){
+        // 中断中打开LED0
     LED0 = ~LED0;
+    }
+
 }
