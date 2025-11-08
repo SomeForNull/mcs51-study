@@ -28,8 +28,8 @@ void INT0_Func() interrupt 0
     Com_Util_Delay_Ms(10);
     //如果延迟后还在低位则是正常 就算后延抖动下降延触发的时候 延迟10ms后 会在高电位
     if(P32==0){
-        // 中断中打开LED0
-    LED0 = ~LED0;
+        // 中断控制定时器
+       ET0=!ET0;
     }
 
 }
