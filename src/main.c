@@ -1,17 +1,31 @@
 #include "Int_DigitalTube.h"
-#include "Int_MatrixKey.h"
 #include "Dri_Interrupt_Open.h"
 #include "Dri_Timer0.h"
-#define LED0   P00
+#define LED0 P00
+/**
+ * @brief 定时器任务-控制LED 0.5s闪烁
+ * 
+ */
+void LED_Blink()
+{
+    static u16 count = 0;
+    count++;
+    if(count>=500){
+        LED0 = ~LED0;
+        count=0;
+    }
+}
+
 int main()
 {
     
-    // 初始化数码管显示和按键扫描
-    u8 key_pressed = 0;
+    //初始化外部中断0
     Init_INT0();
+    //初始化定时器0
     Dri_Timer0_Init();
+    //注册定时器回调函数
+    Dri_Timer0_RegisterCallback(LED_Blink);
     while (1);
-
 }
 
 
