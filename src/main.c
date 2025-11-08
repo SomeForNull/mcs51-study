@@ -1,5 +1,7 @@
 #include "Int_DigitalTube.h"
 #include "Int_MatrixKey.h"
+#include "Dri_Interrupt_Open.h"
+#include "Dri_Timer0.h"
 #define LED0   P00
 int main()
 {
@@ -7,7 +9,8 @@ int main()
     // 初始化数码管显示和按键扫描
     u8 key_pressed = 0;
     Init_INT0();
-while (1);
+    Dri_Timer0_Init();
+    while (1);
 
 }
 
