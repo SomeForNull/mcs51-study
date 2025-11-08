@@ -26,6 +26,15 @@ void Int_LEDMartrix_SetPic(u8 Pic[])
     }
 }
 
+void Int_LEDMartrix_Shift(u8 pic)
+{
+    u8 i;
+    for (i = 7; i > 0; i--) {
+        s_buffer[i] = s_buffer[i - 1];
+    }
+    s_buffer[0] = pic;
+}
+
 void Int_LEDMartrix_Refrensh()
 {
     u8 i;

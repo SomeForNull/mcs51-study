@@ -1,20 +1,17 @@
-#include "Int_LEDMartrix.h"
 #include "Dri_Timer0.h"
+#include "Int_LEDMartrix.h"
+
+u8 picture[15] = {0x10, 0x11, 0x91, 0x91, 0xFD, 0x0B,
+                  0x0B, 0x00, 0x7F, 0x80, 0x80, 0x80,
+                  0x80, 0xE0, 0x00};
+
 void main()
 {
-    u8 pic[8] = {0x1,
-                 0x2,
-                 0x4,
-                 0x8,
-                 0x10,
-                 0x20,
-                 0x40,
-                 0x80};
+    u8 i;
     Dri_Timer0_Init();
     Int_LEDMartrix_Int();
-    Int_LEDMartrix_SetPic(pic);
-    while (1) {
-        //调用函数也会有汇编指令
-        //Int_LEDMartrix_Refrensh();
+    for (i = 0; i < 15; i++) {
+        Int_LEDMartrix_Shift(picture[i]);
+        Com_Util_Delay_Ms(200);
     }
 }
