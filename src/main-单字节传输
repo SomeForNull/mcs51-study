@@ -1,20 +1,17 @@
 #include <STC89C5xRC.H>
 #include "Dri_UART.h"
-#include "Com_Util.h"
-#include "Dri_Timer0.h"
-#include <STRING.H>
+
 void main()
 {
-    char str[16];
-    Dri_Timer0_Init();
+    char command;
     Dri_UART_Init();
     while (1) {
-        if (Dri_UART_RecvStr(&str)) {
-            if (strcmp(str,"on") == 0) {
+        if (Dri_UART_RecvChar(&command)) {
+            if (command == 'A') {
                 // 点亮LED
                 P0 = 0x00;
                 Dri_UART_SendStr("Ok:LED is on");
-            } else if (strcmp(str,"off")== 0) {
+            } else if (command == 'B') {
                 // 熄灭LED
                 P0 = 0xFF;
                 Dri_UART_SendStr("Ok:LED is off");

@@ -21,7 +21,15 @@ void Dri_UART_SendStr(char *str);
  *
  * @return 0为读取失败，1为读取成功
  */
-bit Dri_UART_RecvChar(char *p_ch);
+bit Dri_UART_RecvChar(char *str);
+/**
+ * @brief 通过串口接收字符串
+ *
+ * @param p_ch 要接收的字符指针
+ *
+ * @return 0为读取失败，1为读取成功
+ */
+bit Dri_UART_RecvStr(char *str);
 
 
 #endif /* __DRI_UART_H__ */
