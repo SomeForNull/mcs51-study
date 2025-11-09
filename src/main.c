@@ -1,17 +1,24 @@
-#include "Dri_Timer0.h"
-#include "Int_LEDMartrix.h"
-//孔
-u8 picture[15] = {0x10, 0x11, 0x91, 0x91, 0xFD, 0x0B,
-                  0x0B, 0x00, 0x7F, 0x80, 0x80, 0x80,
-                  0x80, 0xE0, 0x00};
+#include <STC89C5xRC.H>
+#include "Dri_UART.h"
 
 void main()
 {
-    u8 i;
-    Dri_Timer0_Init();
-    Int_LEDMartrix_Int();
-    for (i = 0; i < 15; i++) {
-        Int_LEDMartrix_Shift(picture[i]);
-        Com_Util_Delay_Ms(200);
+    char command;
+    Dri_UART_Init();
+    while (1) {
+        if (Dri_UART_RecvChar(&command)) {
+            if (command == 'A') {
+                // 点亮LED
+                P0 = 0x00;
+                Dri_UART_SendStr("Ok:LED is on");
+            } else if (command == 'B') {
+                // 熄灭LED
+                P0 = 0xFF;
+                Dri_UART_SendStr("Ok:LED is off");
+            } else {
+                // 报错
+                Dri_UART_SendStr("Error:Unknown command");
+            }
+        }
     }
 }
