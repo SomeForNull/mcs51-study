@@ -1,27 +1,21 @@
-#include <STC89C5xRC.H>
-#include "Dri_UART.h"
-#include "Com_Util.h"
 #include "Dri_Timer0.h"
-#include <STRING.H>
+#include "Int_LEDMartrix.h"
+#include "Int_EEPROM.h"
+//孔
+u8 picture[15] = {0x10, 0x11, 0x91, 0x91, 0xFD, 0x0B,
+                  0x0B, 0x00, 0x7F, 0x80, 0x80, 0x80,
+                  0x80, 0xE0, 0x00};
+u8 buffer[15];
 void main()
 {
-    char str[16];
+    u8 i;
     Dri_Timer0_Init();
-    Dri_UART_Init();
-    while (1) {
-        if (Dri_UART_RecvStr(&str)) {
-            if (strcmp(str,"on") == 0) {
-                // 点亮LED
-                P0 = 0x00;
-                Dri_UART_SendStr("Ok:LED is on");
-            } else if (strcmp(str,"off")== 0) {
-                // 熄灭LED
-                P0 = 0xFF;
-                Dri_UART_SendStr("Ok:LED is off");
-            } else {
-                // 报错
-                Dri_UART_SendStr("Error:Unknown command");
-            }
-        }
+    Int_LEDMartrix_Int();
+    Int_EEPROM_WriteBytes(0, picture, 15);
+    Int_EEPROM_ReadBytes(0, buffer, 15);
+
+    for (i = 0; i < 15; i++) {
+        Int_LEDMartrix_Shift(buffer[i]);
+        Com_Util_Delay_Ms(200);
     }
 }
