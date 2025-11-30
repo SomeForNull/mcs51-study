@@ -1,0 +1,13 @@
+#ifndef __INT_DS18B20_H__
+#define __INT_DS18B20_H__
+#include <STC89C5xRC.H>
+
+/**
+ * @brief 获取温度
+ *
+ * @return u8
+ */
+char Int_DS18B20_GetTemperature();
+
+
+#endif /* __INT_DS18B20_H__ */

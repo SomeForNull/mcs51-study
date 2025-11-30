@@ -7,4 +7,13 @@ typedef unsigned long u32;
 
 void Com_Util_Delay_Ms(u16 ms);
 
+void Com_Util_Delay480us(void);	//@11.0592MHz
+
+void Com_Util_Delay60us(void);	//@11.0592MHz
+
+void Com_Util_Delay420us(void);	//@11.0592MHz
+
+void Com_Util_Delay10us(void);	//@11.0592MHz
+
+void Com_Util_Delay50us(void);	//@11.0592MHz
 #endif // !_COM_UTIL_H

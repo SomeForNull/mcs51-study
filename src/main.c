@@ -1,12 +1,13 @@
 #include "Int_OLED.h"
+#include "Int_DS18B20.h"
+#include "Com_Util.h"
 void main()
 {
     Int_OLED_Init();
     Int_OLED_Clear();
-    Int_OLED_ShowStr(0, 0, "Hello World!");
-    Int_OLED_ShowStr(11, 1, "---ZL");
     while (1) {
-        /* code */
+        Int_OLED_ShowNum(0, 0, Int_DS18B20_GetTemperature());
+        Com_Util_Delay_Ms(500);
     }
 }
    
